@@ -1,17 +1,24 @@
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Cart from './Cart/Cart';
-import Home from './Home/Home';
-import Item from './Item/Item';
+import Home, { homeLoader } from './Home/Home';
+import Item, { itemLoader } from './Item/Item';
 import ItemRootLayout from './ItemRootLayout/ItemRootLayout';
 import RootLayout from './RootLayout/RootLayout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path = "/" element={<RootLayout/>}>
-      <Route index element={<Home/>}/> 
+      <Route 
+      index 
+      element={<Home/>}
+      loader={homeLoader}
+      /> 
       <Route path="item" element={<ItemRootLayout/>}>
-        <Route path=':id' element={<Item/>}/>
+        <Route 
+        path=':id' 
+        element={<Item/>}
+        loader={itemLoader}/>
       </Route>
       <Route path="cart" element={<Cart/>}/>
     </Route>

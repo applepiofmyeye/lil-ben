@@ -1,11 +1,10 @@
-import { useParams } from 'react-router-dom'
+import { useLoaderData, useParams } from 'react-router-dom'
 import './Item.css'
-import { store_items } from '../data/items'
 import { useState } from 'react'
 
 export default function Item() {
     const itemId = useParams()
-    const item = store_items.get(parseInt(itemId.id))
+    const item = useLoaderData()
 
     const [qty, setQty] = useState(0)
     const [zeroQtyErr, setZeroQtyError] = useState(false)
@@ -48,15 +47,19 @@ export default function Item() {
             add to cart
           </button>
           {zeroQtyErr && <p>no lil bens selected (selected: {qty})</p>}
-
         </div>
-
-
-
 
       </div>
     </div>
     
     </div>
   )
+}
+
+export const itemLoader = async ({ params }) => {
+  const { id } = params
+
+  const res = await fetch('http://localhost:4000/bens/' + id)
+
+  return res.json()
 }
