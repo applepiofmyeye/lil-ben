@@ -1,0 +1,33 @@
+.cart-content img {
+    width: 100px;
+    height: 133.33px;
+    object-fit: cover; /* Crop the image to cover the container */
+  overflow: hidden;
+}
+
+.item-content {
+    display: flex;
+    padding: 0px 200px;
+    margin: 20px 0;
+}
+
+.cart-to-item-link {
+    color: inherit;
+    text-decoration: none;
+
+    
+}
+
+.checkout-btn {
+    padding: 0 20px;
+    margin-top: 20px ;
+    font-family: 'Itim', sans-serif;
+    color: #46688d;
+    background-color: #faf6ca;
+    width: 40%;
+    height: 3rem;
+    border: 0px solid #faf6ca;
+    border-radius: 10px;
+    font-size: 20px;
+  }
+

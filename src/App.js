@@ -1,10 +1,12 @@
 import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from 'react-router-dom';
 import './App.css';
 import Cart from './Cart/Cart';
+import {CartProvider} from './contexts/CartContext';
 import Home, { homeLoader } from './Home/Home';
 import Item, { itemLoader } from './Item/Item';
 import ItemRootLayout from './ItemRootLayout/ItemRootLayout';
 import RootLayout from './RootLayout/RootLayout';
+import Success from './Success/Success';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,40 +22,24 @@ const router = createBrowserRouter(
         element={<Item/>}
         loader={itemLoader}/>
       </Route>
-      <Route path="cart" element={<Cart/>}/>
+      <Route 
+      path="cart" 
+      element={<Cart/>}
+      loader={homeLoader}/>
+      <Route
+      path="success"
+      element={<Success/>}/>
     </Route>
   )
 )
-
-const handleClick = (event) => {
-  fetch('http://localhost:3000/create-checkout-session', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      items: [
-        { id: 1, quantity: 2},
-        { id: 2, quantity: 1 }
-      ]
-    })
-
-  }).then((res) => {
-    res.ok ? res.json() : res.json().then(json => Promise.reject(json))
-
-  }).then(({ url }) => {
-    console.log(url);
-    window.location = url
-  }).catch(e => {
-    console.error(e.error)
-  })
-}
 
 
 function App() {
 
   return (
-    <RouterProvider router={router}/>
+    <CartProvider value={[]}>
+          <RouterProvider router={router}/>
+    </CartProvider>
   );
 }
 

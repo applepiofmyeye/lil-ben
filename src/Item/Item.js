@@ -1,10 +1,12 @@
 import { useLoaderData, useParams } from 'react-router-dom'
 import './Item.css'
 import { useState } from 'react'
+import { useCart } from '../contexts/CartContext'
 
 export default function Item() {
     const itemId = useParams()
     const item = useLoaderData()
+    const { addToCart } = useCart()
 
     const [qty, setQty] = useState(0)
     const [zeroQtyErr, setZeroQtyError] = useState(false)
@@ -22,7 +24,8 @@ export default function Item() {
     const handleAddCart = (event) => {
       if (qty > 0) {
         const quantityToAdd = qty
-        console.log(quantityToAdd);
+        addToCart(itemId.id, quantityToAdd)
+        console.log(itemId.id, quantityToAdd);
         setQty(0)
       } else {
         setZeroQtyError(true)

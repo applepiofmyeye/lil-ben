@@ -21,7 +21,7 @@ const store_items = new Map([
 app.post('/create-checkout-session', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
+            payment_method_types: ['paynow'],
             mode: 'payment',
             line_items: req.body.items.map(item => {
                 const storeItem = store_items.get(item.id)
@@ -36,8 +36,8 @@ app.post('/create-checkout-session', async (req, res) => {
                     quantity: item.quantity,
                 }
             }),
-            success_url: `${process.env.CLIENT_URL}/success.html`, // if client and server are separate, use CLIENT_URL here
-            cancel_url: `${process.env.CLIENT_URL}/cancel.html`
+            success_url: `${process.env.CLIENT_URL}/success`, // if client and server are separate, use CLIENT_URL here
+            cancel_url: `${process.env.CLIENT_URL}/cart`
         })
         res.json({ url: session.url })
     } catch (e) {
