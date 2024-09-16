@@ -1,4 +1,7 @@
 # Lil Ben Universe E-Commerce Website
+
+### Video [here](https://www.tiktok.com/@lilbenuniverse/video/7327104521048444161)
+
 Made for my own little shop, I made this with the following techstack:
 - Node.js (Express) Server + Stripe: for an API endpoint for my React App to call on
 - Frontend: React
